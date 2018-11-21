@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+app_name="${GRAPH_NAME:-$(basename $PWD)}"
+xref_out=${XREF_OUT:-xref_graph.dot}
+
+[[ ! -e $xref_out ]] && exit 1
+
+read -rd '' vis <<'DOT'
+  layout=dot;
+  overlap=false;
+  splines=polyline;
+  pack=true;
+  start="random";
+  graph [ranksep=3];
+  edge  [len=10];
+  node  [shape=component,style=filled,fillcolor="#F9F7E4"];
+DOT
+
+echo -e "digraph \"$app_name\" {\n  $vis"
+sed -e 1d -e 's/lib\///g' $xref_out
+

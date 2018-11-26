@@ -2,7 +2,7 @@
 app_name="${GRAPH_NAME:-$(basename $PWD)}"
 xref_out=${XREF_OUT:-xref_graph.dot}
 
-[[ ! -e $xref_out ]] && exit 1
+[[ ! -e $xref_out ]] && mix xref graph --format dot || exit 1
 
 read -rd '' vis <<'DOT'
   layout=dot;

@@ -19,3 +19,4 @@ DOT
 echo -e "digraph \"$app_name\" {\n  $vis" | append_dot
 sed -e 1d -e 's/lib\///g' $xref_out | append_dot
 
+[[ -e ${xref_out}_sane ]] && dot -Tsvg -o ${app_name}.svg ${xref_out}_sane
